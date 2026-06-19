@@ -4,5 +4,8 @@ import tailwindcss from '@tailwindcss/vite'
 
 export default defineConfig({
   base: "/saint-benedito/",
+  build: {
+    crossorigin: false,
+  },
   plugins: [react(), tailwindcss()],
 })
