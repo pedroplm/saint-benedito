@@ -1,11 +1,5 @@
 import { useState, useEffect } from "react";
-
-const DATE_RANGES = [
-  { start: new Date(2026, 5, 6), end: new Date(2026, 5, 7) },
-  { start: new Date(2026, 5, 13), end: new Date(2026, 5, 14) },
-  { start: new Date(2026, 5, 20), end: new Date(2026, 5, 21) },
-  { start: new Date(2026, 5, 27), end: new Date(2026, 5, 28) },
-];
+import useCountdown from "./hooks/useCountdown";
 
 const FOOD_ITEMS = [
   { name: "Pastel", emoji: "🥟" },
@@ -28,40 +22,6 @@ const FOOD_ITEMS = [
   { name: "Canjica", emoji: "🥘" },
 ];
 
-function useCountdown() {
-  const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0, isHappening: false, nextDate: null });
-
-  useEffect(() => {
-    function calc() {
-      const now = new Date();
-      for (const range of DATE_RANGES) {
-        const endOfDay = new Date(range.end);
-        endOfDay.setHours(23, 59, 59, 999);
-        if (now >= range.start && now <= endOfDay) {
-          setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0, isHappening: true, nextDate: range.start });
-          return;
-        }
-      }
-      let next = DATE_RANGES.find((r) => r.start > now);
-      if (!next) next = DATE_RANGES[0];
-      const diff = next.start.getTime() - now.getTime();
-      setTimeLeft({
-        days: Math.floor(diff / 86400000),
-        hours: Math.floor((diff % 86400000) / 3600000),
-        minutes: Math.floor((diff % 3600000) / 60000),
-        seconds: Math.floor((diff % 60000) / 1000),
-        isHappening: false,
-        nextDate: next.start,
-      });
-    }
-    calc();
-    const id = setInterval(calc, 1000);
-    return () => clearInterval(id);
-  }, []);
-
-  return timeLeft;
-}
-
 function WhatsappShare() {
   const text = encodeURIComponent(
     "🎉 Venha para a Festa Junina da Paróquia São Benedito! Sábados e domingos de junho, 18h às 22h. Entrada gratuita! Rua dos Iguás, 26 - Vila Costa e Silva, Campinas. Vem pro arraiá! 🎪"
@@ -82,32 +42,41 @@ function WhatsappShare() {
 }
 
 function CountdownSection() {
-  const { days, hours, minutes, seconds, isHappening } = useCountdown();
+  const cd = useCountdown();
 
-  if (isHappening) {
+  if (cd.status === "happening") {
     return (
-      <div className="bg-red-600 text-white text-center py-4 sm:py-5 px-4">
-        <p className="text-xl sm:text-2xl font-bold font-bold animate-pulse">
-          🎉 A festa está acontecendo agora! Venha participar! 🎉
+      <div className="bg-red-600 text-white text-center py-5 sm:py-6 px-4">
+        <p className="text-2xl sm:text-3xl font-bold animate-pulse">
+          🎉 FESTA ROLANDO! VENHA ARRAIAR COM A GENTE! 🎉
         </p>
-        <p className="text-sm sm:text-base mt-1 opacity-90">
-          Hoje tem quadrilha, música ao vivo e comidas típicas das 18h às 22h
+        <p className="text-sm sm:text-base mt-2 opacity-90">
+          Quadrilha, música ao vivo e comidas típicas — 18h às 22h
         </p>
+      </div>
+    );
+  }
+
+  if (cd.status === "over") {
+    return (
+      <div className="bg-stone-700 text-white text-center py-5 sm:py-6 px-4">
+        <p className="text-lg sm:text-xl font-bold">Festa Junina 2026 encerrada</p>
+        <p className="text-sm sm:text-base mt-1 opacity-80">Voltamos ano que vem! 🎪</p>
       </div>
     );
   }
 
   return (
     <div className="bg-gradient-to-r from-red-700 via-red-600 to-red-700 text-white text-center py-5 sm:py-6 px-4">
-      <p className="text-lg sm:text-xl font-bold mb-2">Faltam apenas</p>
+      <p className="text-lg sm:text-xl font-bold mb-2">Faltam</p>
       <div className="flex justify-center gap-3 sm:gap-6">
-        <TimeBlock value={days} label="Dias" />
+        <TimeBlock value={cd.days} label="Dias" />
         <span className="text-3xl sm:text-5xl font-bold text-yellow-300 self-center">:</span>
-        <TimeBlock value={hours} label="Horas" />
+        <TimeBlock value={cd.hours} label="Horas" />
         <span className="text-3xl sm:text-5xl font-bold text-yellow-300 self-center">:</span>
-        <TimeBlock value={minutes} label="Min" />
+        <TimeBlock value={cd.minutes} label="Min" />
         <span className="text-3xl sm:text-5xl font-bold text-yellow-300 self-center">:</span>
-        <TimeBlock value={seconds} label="Seg" />
+        <TimeBlock value={cd.seconds} label="Seg" />
       </div>
       <p className="text-sm sm:text-base mt-3 opacity-90">para o próximo dia de festa!</p>
     </div>
