@@ -139,16 +139,28 @@ function Hero() {
         </p>
         <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4">
           <a
-            href="https://www.google.com/maps/search/Rua+dos+Iguás,+26,+Vila+Costa+e+Silva,+Campinas"
+            href="https://www.google.com/maps/@-22.8622962,-47.0654948,3a,75y,61.46h,103.55t/data=!3m7!1e1!3m5!1sJnb_2Q_7n0_Ogt50thtsBQ!2e0!6shttps:%2F%2Fstreetviewpixels-pa.googleapis.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D-13.552489407612839%26panoid%3DJnb_2Q_7n0_Ogt50thtsBQ%26yaw%3D61.45987123692244!7i16384!8i8192"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 bg-yellow-400 hover:bg-yellow-300 text-red-800 font-bold px-6 py-3 rounded-full transition-all shadow-lg hover:shadow-xl active:scale-95 text-sm sm:text-base"
+            className="inline-flex items-center gap-2 bg-yellow-400 hover:bg-yellow-300 text-red-800 font-bold px-5 py-3 rounded-full transition-all shadow-lg hover:shadow-xl active:scale-95 text-sm sm:text-base"
           >
             <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
               <path strokeLinecap="round" strokeLinejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
             </svg>
-            Como Chegar
+            Entrada Estacionamento
+          </a>
+          <a
+            href="https://www.google.com/maps/@-22.8620215,-47.064199,3a,75y,274.92h,85.82t/data=!3m7!1e1!3m5!1sEBglNaQWj_M2Y1S5DpgOhQ!2e0!6shttps:%2F%2Fstreetviewpixels-pa.googleapis.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D4.181974687833204%26panoid%3DEBglNaQWj_M2Y1S5DpgOhQ%26yaw%3D274.9216499344763!7i16384!8i8192"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 bg-yellow-400 hover:bg-yellow-300 text-red-800 font-bold px-5 py-3 rounded-full transition-all shadow-lg hover:shadow-xl active:scale-95 text-sm sm:text-base"
+          >
+            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M.652 15.652a2.25 2.25 0 010 3.18l-3.18 3.18a2.25 2.25 0 01-3.18 0l-3.18-3.18a2.25 2.25 0 010-3.18l3.18-3.18a2.25 2.25 0 013.18 0l3.18 3.18z" />
+              <path strokeLinecap="round" strokeLinejoin="round" d="M12 3.75a8.25 8.25 0 100 16.5 8.25 8.25 0 000-16.5z" />
+            </svg>
+            Entrada Direta ao Arraiá
           </a>
           <WhatsappShare />
         </div>
